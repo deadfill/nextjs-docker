@@ -8,10 +8,6 @@ services:
     command: npm run start
     ports:
       - '3000:3000'
-    depends_on:
-      - mongodb1
-      - mongodb2
-      - mongodb3
     networks:
       - app_network
   nginx: 
