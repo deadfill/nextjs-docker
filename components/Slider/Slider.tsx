@@ -3,13 +3,9 @@ import Image from "next/image";
 import sliderImg from "../../public/slider.jpg";
 import styles from "./Slider.module.css";
 import clsx from "clsx";
-import { useState } from "react";
 
-export default function Slider({
-  children,
-  ...props
-}: SliderProps): JSX.Element {
-  const [active, setActive] = useState<boolean>(true);
+export default function Slider({ ...props }: SliderProps): JSX.Element {
+  const active = true;
   return (
     <section>
       <div {...props} className={styles.slider}>
