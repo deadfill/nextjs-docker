@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  nextjs:
+    environment:
+    - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-appdb}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    networks:
+      - app_network
+  nginx: 
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - nextjs
+    networks:
+      - app_network
+  typesense:
+    image: typesense/typesense:0.24.1
+    container_name: typesense
+    restart: always
+    ports:
+      - "8108:8108"
+    volumes:
+      - ./data:/data
+    environment:
+      - TYPESENSE_API_KEY=xyz
+      - TYPESENSE_DATA_DIR=/data
+    networks:
+      - app_network
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./data-mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: deadfill
+      MONGO_INITDB_ROOT_PASSWORD: filldead18101990
+    ports:
+      - 27017:27017
+    networks:
+      - app_network
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: deadfill
+      ME_CONFIG_MONGODB_ADMINPASSWORD: filldead18101990
+      ME_CONFIG_MONGODB_URL: mongodb://deadfill:filldead18101990@mongo:27017
+    networks:
+      - app_network
+volumes:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge

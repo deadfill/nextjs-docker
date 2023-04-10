@@ -1,0 +1,14 @@
+.wrapper {
+    display: inline-block;
+    cursor: pointer;
+    height: auto;
+    width: 240px;
+    background-color: aquamarine;
+}
+
+.hits_name {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+
