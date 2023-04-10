@@ -7,8 +7,6 @@ WORKDIR /usr/app
 RUN npm install --global pm2
 
 RUN npm install pm2 -g
-ENV PM2_PUBLIC_KEY 2xdzakaxxl6ovuv
-ENV PM2_SECRET_KEY 9um9sbv4kyfypbz
 
 
 # Copy "package.json" and "package-lock.json" before other files
