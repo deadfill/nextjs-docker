@@ -14,10 +14,9 @@ export default function Header({ ...props }: HeaderProps): JSX.Element {
           <Logo />
         </Link>
 
-        <ButtonMenu
-          className={styles.header_button}
-          appearance="ghost"
-        ></ButtonMenu>
+        <ButtonMenu className={styles.header_button} appearance="ghost">
+          {}
+        </ButtonMenu>
         <Search className={styles.search}></Search>
         <Navbar className={styles.navbar} />
       </div>
