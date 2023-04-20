@@ -10,12 +10,16 @@ export default function Header({ ...props }: HeaderProps): JSX.Element {
   return (
     <header {...props}>
       <div className={styles.wrapper}>
-        <Link href={"/"}>
+        <Link className={styles.logo} href={"/"}>
           <Logo />
         </Link>
-        <ButtonMenu appearance="primary">Каталог</ButtonMenu>
-        <Search></Search>
-        <Navbar />
+
+        <ButtonMenu
+          className={styles.header_button}
+          appearance="ghost"
+        ></ButtonMenu>
+        <Search className={styles.search}></Search>
+        <Navbar className={styles.navbar} />
       </div>
     </header>
   );

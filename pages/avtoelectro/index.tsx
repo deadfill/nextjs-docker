@@ -1,7 +1,7 @@
 export default function Help(): JSX.Element {
   return (
     <>
-      <div>Помощь</div>
+      <div>hello</div>
     </>
   );
 }

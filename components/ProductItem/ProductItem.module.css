@@ -1,14 +1,21 @@
 .wrapper {
-    display: inline-block;
+    display: grid;
     cursor: pointer;
-    height: auto;
-    width: 240px;
     background-color: aquamarine;
+}
+
+.wrapper_image {
+    position: relative;
+    height: 240px;
 }
 
 .hits_name {
     font-size: 20px;
     margin-bottom: 5px;
 }
+
+
+
+
 
 

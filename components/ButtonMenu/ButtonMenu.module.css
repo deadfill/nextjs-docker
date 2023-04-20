@@ -3,15 +3,22 @@
     cursor: pointer;
     align-items: center;
     border: none;
-    border-radius: 12px;
-    background-color: var(--orange-01);
-    padding: 16px 38px;
     color: white;
     font-weight: 600;
     font-size: 18px;
-    margin-right: 30px;
-    margin-left: 40px;
     outline: none;
+}
+
+.primary {
+    background-color: var(--orange-01);
+    border-radius: 12px;
+    padding: 16px 38px;
+}
+
+.ghost {
+    background-color: inherit;
+    border-radius: none;
+    padding: 0;
 }
 
 .button_active {
@@ -56,10 +63,14 @@
     width: 30px;
 }
 
+.ghost_span {
+    background: var(--orange-01); 
+}
+
 .opened_top {
     background: var(--orange-01);
     transform: rotate(45deg);
-    transform-origin: 5% 15%;
+    transform-origin: 4px 6px;
 }
 
 .opened_mid {
@@ -69,7 +80,7 @@
 .opened_bot {
     background: var(--orange-01);
     transform: rotate(-45deg);
-    transform-origin: 0%;
+    transform-origin: 2px -2px;
 }
 
 

@@ -24,4 +24,14 @@ module.exports = {
   },
   reactStrictMode: true,
   output: 'standalone',
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3.timeweb.com',
+        port: '',
+        pathname: '/41591949-c38f91aa-39f7-48e6-832c-c590ded4c690/**',
+      },
+    ],
+  },
 };

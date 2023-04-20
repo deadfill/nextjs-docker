@@ -9,3 +9,11 @@
     background-color: white;
     color: var(--grey-04);
 }
+
+
+@media (max-width: 576px) {
+    .button {
+        margin: 0;
+        padding: 0;
+    }
+  }

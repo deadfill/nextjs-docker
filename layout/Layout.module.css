@@ -22,4 +22,29 @@
 .footer {
     grid-area: footer;
     background-color: var(--white);
+    height: 407px;
 }
+
+
+@media (max-width: 1410px) {
+    .wrapper {
+        grid-template-columns: 47px minmax(320px, 1410px) 47px;
+    }
+  }
+
+@media (max-width: 960px) {
+    .wrapper {
+        grid-template-columns: 15px minmax(320px, 960px) 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .wrapper {
+        grid-template-columns: minmax(320px, 576px);
+        grid-template-areas: 
+        "header"
+        "body"
+        "footer";
+    }
+  }
+

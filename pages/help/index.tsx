@@ -1,38 +1,25 @@
-import { Hits, HitsPerPage, Pagination } from "react-instantsearch-hooks-web";
-import styles from "./Style.module.css";
-
-const Product = ({ hit }: any) => {
-  console.log(hit.image);
-  return (
-    <div className={styles.wrapper}>
-      <div>
-        <img src={hit.image} alt="" />
-      </div>
-      <div className={styles.hits_name}>{hit.name}</div>
-      <div>Цена: {hit.price}</div>
-    </div>
-  );
-};
+import {
+  Hits,
+  RangeInput,
+  RefinementList,
+} from "react-instantsearch-hooks-web";
+import Hit from "@/components/ProductItem/ProductItem";
+import styles from "./Help.module.css";
 
 export default function Help(): JSX.Element {
   return (
-    <>
-      <div>
-        <Hits
-          hitComponent={Product}
-          classNames={{
-            list: styles.wrapper_hits,
-            item: styles.hits_item,
-          }}
-        />
-        <HitsPerPage
-          items={[
-            { label: "1 hits per page", value: 1, default: true },
-            { label: "16 hits per page", value: 16 },
-          ]}
-        />
-        <Pagination></Pagination>
+    <div className={styles.wrapper}>
+      <div className={styles.wrapper_menu}>
+        <RefinementList attribute={"category"}></RefinementList>
+        <RangeInput attribute="price" />
       </div>
-    </>
+      <Hits
+        classNames={{
+          list: styles.hit_list,
+          item: styles.hit_item,
+        }}
+        hitComponent={Hit}
+      />
+    </div>
   );
 }

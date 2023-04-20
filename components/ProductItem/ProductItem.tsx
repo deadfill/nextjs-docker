@@ -1,19 +1,24 @@
-import { ProductItemProps } from "./ProductItem.props";
 import styles from "./ProductItem.module.css";
-import ProductImage from "@/public/productImage.jpg";
 import Image from "next/image";
 
-export default function ProductItem({
-  hit,
-  ...props
-}: ProductItemProps): JSX.Element {
+export default function Hit({ hit }: any) {
+  console.log(hit.image_url);
   return (
-    <div {...props} className={styles.wrapper}>
-      <div>
-        <Image src={ProductImage} alt={""}></Image>
+    <>
+      <div className={styles.wrapper}>
+        <div className={styles.wrapper_image}>
+          <Image
+            className={styles.card_image}
+            src={hit.image_url}
+            alt={""}
+            fill
+          />
+        </div>
+
+        <div>{hit.name}</div>
+        <div>{hit.price}</div>
+        <div>{hit.category}</div>
       </div>
-      <div className={styles.hits_name}>{hit.name}</div>
-      <div>Цена: {hit.price}</div>
-    </div>
+    </>
   );
 }

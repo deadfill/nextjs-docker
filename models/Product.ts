@@ -7,7 +7,9 @@ export interface IProduct {
   price: number;
   country: string;
   descriptions: string;
-  category: string
+  category: string;
+  vote_average: number;
+  image_url: string;
 }
 
 const productSchema = new Schema<IProduct>({
@@ -17,6 +19,8 @@ const productSchema = new Schema<IProduct>({
   country: String,
   descriptions: String,
   category: String,
+  vote_average: Number,
+  image_url: String
 });
 
 const Product = models.Product|| model<IProduct>('Product', productSchema);

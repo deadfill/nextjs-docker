@@ -1,5 +1,5 @@
-import { ButtonHeaderProps } from "./ButtonHeader.props";
-import styles from "./ButtonHeader.module.css";
+import { ButtonHeaderProps } from "./ButtonNav.props";
+import styles from "./ButtonNav.module.css";
 
 export default function ButtonHeader({
   children,

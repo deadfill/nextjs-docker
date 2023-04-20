@@ -1,10 +1,11 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { MenuProps, NavbarProps } from "./Navbar.prop";
-import ButtonHeader from "../ButtonHeader/ButtonHeader";
+import ButtonHeader from "../ButtonNav/ButtonNav";
 import CartSvg from "../../public/icon/headerIcon/cart.svg";
 import FavSvg from "../../public/icon/headerIcon/favSvg.svg";
 import UserSvg from "../../public/icon/headerIcon/userSvg.svg";
+import clsx from "clsx";
 
 const menuItem: MenuProps[] = [
   {
@@ -24,7 +25,10 @@ const menuItem: MenuProps[] = [
   },
 ];
 
-export default function Navbar({ ...props }: NavbarProps): JSX.Element {
+export default function Navbar({
+  className,
+  ...props
+}: NavbarProps): JSX.Element {
   const buildMenu = menuItem.map(({ route, name, icon }, id) => {
     return (
       <li className={styles.li} key={id}>
@@ -39,7 +43,7 @@ export default function Navbar({ ...props }: NavbarProps): JSX.Element {
   });
 
   return (
-    <nav {...props}>
+    <nav className={clsx(className)} {...props}>
       <ul className={styles.wrapper}>{buildMenu}</ul>
     </nav>
   );

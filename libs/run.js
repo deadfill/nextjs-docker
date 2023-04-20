@@ -100,7 +100,7 @@ async function main() {
       {
         name: 'price',
         type: 'int32',
-        facet: false,
+        facet: true,
       },
       {
         name: 'country',
@@ -113,9 +113,19 @@ async function main() {
         facet: false,
       },
       {
-        name: 'category',
+        name: "category",
         type: 'string',
-        facet: false,
+        facet: true,
+      },
+      {
+        name: "vote_average",
+        type: "float",
+        facet: true,
+      },
+      {
+        name: "image_url",
+        type: "string",
+        facet: true,
       },
     ],
     default_sorting_field: 'price',

@@ -5,9 +5,9 @@ import Slider from "../components/Slider/Slider";
 export default function Home(): JSX.Element {
   return (
     <>
-      <Slider />
+      {/* <Slider />
       <PopularCat />
-      <News />
+      <News /> */}
     </>
   );
 }
