@@ -10,8 +10,7 @@ services:
     ports:
       - 27017:27017
     entrypoint: [ "/usr/bin/mongod", "--replSet", "rsmongo", "--bind_ip_all", "--wiredTigerCacheSizeGB", "1"]
-    networks:
-      - app_network
+
   mongodb2:
     image: mongo:4
     restart: always
@@ -21,8 +20,7 @@ services:
     ports:
       - 27018:27017
     entrypoint: [ "/usr/bin/mongod", "--replSet", "rsmongo", "--bind_ip_all", "--wiredTigerCacheSizeGB", "1"]
-    networks:
-      - app_network
+
   mongodb3:
     image: mongo:4
     restart: always
@@ -32,8 +30,7 @@ services:
     ports:
       - 27019:27017
     entrypoint: [ "/usr/bin/mongod", "--replSet", "rsmongo", "--bind_ip_all", "--wiredTigerCacheSizeGB", "1" ]
-    networks:
-      - app_network
+
   mongosetup:
     image: "mongo-setup"
     build: "./mongo-setup"
@@ -42,8 +39,6 @@ services:
       - mongodb1
     volumes:
       - mongostatus:/data/
-    networks:
-      - app_network
 
   nextjs:
     build:
@@ -56,16 +51,14 @@ services:
       - mongodb1
       - mongodb2
       - mongodb3
-    networks:
-      - app_network
+
   nginx: 
     build: ./nginx
     ports:
       - 80:80
     depends_on:
       - nextjs
-    networks:
-      - app_network
+
   mongo-express:
     image: mongo-express
     restart: always
@@ -77,8 +70,7 @@ services:
       - mongodb3
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://mongodb1:27017,mongodb2:27017,mongodb3:27017/?replicaSet=rsmongo
-    networks:
-      - app_network
+
   typesense:
     image: typesense/typesense:0.24.1
     container_name: typesense
@@ -90,15 +82,9 @@ services:
     environment:
       - TYPESENSE_API_KEY=xyz
       - TYPESENSE_DATA_DIR=/data
-    networks:
-      - app_network
 
 volumes:
     mongodata1:
     mongodata2:
     mongodata3:
     mongostatus:
-
-networks:
-  app_network:
-    driver: bridge

@@ -7,7 +7,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const client = new Typesense.Client({
   nodes: [
     {
-      host: 'typesense',
+      host: 'localhost',
       port: 8108,
       protocol: 'http',
     },
