@@ -1,25 +1,90 @@
 import {
   Hits,
+  HitsPerPage,
+  InstantSearch,
+  Pagination,
   RangeInput,
   RefinementList,
+  SortBy,
+  InstantSearchServerState,
+  InstantSearchSSRProvider,
 } from "react-instantsearch-hooks-web";
 import Hit from "@/components/ProductItem/ProductItem";
 import styles from "./Help.module.css";
+import { getServerState } from "react-instantsearch-hooks-server";
+import { searchClient } from "@/libs/clientTypesense";
+import { createInstantSearchRouterNext } from "react-instantsearch-hooks-router-nextjs";
+import singletonRouter from "next/router";
+import { renderToString } from "react-dom/server";
 
-export default function Help(): JSX.Element {
+type SearchPageProps = {
+  serverState?: InstantSearchServerState;
+  serverUrl: URL;
+};
+
+export default function Help({
+  serverState,
+  serverUrl,
+}: SearchPageProps): JSX.Element {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.wrapper_menu}>
-        <RefinementList attribute={"category"}></RefinementList>
-        <RangeInput attribute="price" />
-      </div>
-      <Hits
-        classNames={{
-          list: styles.hit_list,
-          item: styles.hit_item,
+    <InstantSearchSSRProvider {...serverState}>
+      <InstantSearch
+        indexName="products"
+        searchClient={searchClient}
+        routing={{
+          router: createInstantSearchRouterNext({ singletonRouter, serverUrl }),
         }}
-        hitComponent={Hit}
-      />
-    </div>
+      >
+        <div className={styles.wrapper}>
+          <div className={styles.wrapper_menu}>
+            <RefinementList attribute={"category"}></RefinementList>
+            <RangeInput attribute="price" />
+          </div>
+          <div>
+            <HitsPerPage
+              items={[
+                { label: "8 hits per page", value: 8, default: true },
+                { label: "16 hits per page", value: 16 },
+              ]}
+            />
+            <SortBy
+              items={[
+                { label: "Default", value: "products" },
+                { label: "Price (asc)", value: "products/sort/price:asc" },
+                { label: "Price (desc)", value: "products/sort/price:desc" },
+              ]}
+            />
+            <Hits
+              classNames={{
+                list: styles.hit_list,
+              }}
+              hitComponent={Hit}
+            />
+            <Pagination
+              classNames={{
+                list: styles.list_pagination,
+                item: styles.item_pagination,
+                link: styles.link_pagination,
+              }}
+            />
+          </div>
+        </div>
+      </InstantSearch>
+    </InstantSearchSSRProvider>
   );
+}
+
+export async function getServerSideProps({ req }: any) {
+  const protocol = req.headers.referer?.split("://")[0] || "https";
+  const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
+  const serverState = await getServerState(<Help serverUrl={serverUrl} />, {
+    renderToString,
+  });
+
+  return {
+    props: {
+      serverState,
+      serverUrl,
+    },
+  };
 }

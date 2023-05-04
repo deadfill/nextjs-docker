@@ -1,13 +1,28 @@
-import { ButtonHeaderProps } from "./ButtonNav.props";
+import { ButtonNavProps } from "./ButtonNav.props";
 import styles from "./ButtonNav.module.css";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { AppState } from "@/redux/store";
 
-export default function ButtonHeader({
+export default function ButtonNav({
   children,
+  counter,
   ...props
-}: ButtonHeaderProps): JSX.Element {
+}: ButtonNavProps): JSX.Element {
+  const cartCouner = useSelector(
+    (state: AppState) => state.rootReducer.cartSlice.counter
+  );
   return (
-    <button className={styles.button} {...props}>
-      {children}
-    </button>
+    <div className={styles.wrapper_button}>
+      <button
+        className={clsx(styles.button, {
+          [styles.button_cart]: counter,
+        })}
+        {...props}
+      >
+        {children}
+      </button>
+      {counter && <div className={styles.cart_counter}>{cartCouner}</div>}
+    </div>
   );
 }

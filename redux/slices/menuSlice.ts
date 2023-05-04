@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { HYDRATE } from 'next-redux-wrapper'
+import { createSlice } from '@reduxjs/toolkit';
 
-import { AppState } from '../store'
+import { AppState } from '../store';
 
 export interface CounterState {
   opened: boolean
@@ -11,38 +10,29 @@ export interface CounterState {
 const initialState: CounterState = {
   opened: false,
   menuLevel: 1
-}
+};
 
 export const menuSlice = createSlice({
   name: 'menuOpened',
   initialState,
   reducers: {
     setOpen: (state) => {
-      state.opened = true
+      state.opened = true;
     },
     setClose: (state) => {
-      state.opened = false
+      state.opened = false;
     },
     setMenuLevel: (state, action) => {
-      state.menuLevel = action.payload
+      state.menuLevel = action.payload;
     }
   },
 
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      console.log('HYDRATE', state, action.payload);
-      return {
-        ...state,
-        ...action.payload.menuSlice,
-      };
-    },
-  },
-})
+});
 
-export const { setOpen, setClose, setMenuLevel } = menuSlice.actions
+export const { setOpen, setClose, setMenuLevel } = menuSlice.actions;
 
-export const selectCount = (state: AppState) => state.rootReducer.menuSlice.opened
+export const selectCount = (state: AppState) => state.rootReducer.menuSlice.opened;
 
 
 
-export default menuSlice.reducer
+export default menuSlice.reducer;

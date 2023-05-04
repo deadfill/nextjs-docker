@@ -5,7 +5,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     apiKey: "xyz",
     nodes: [
       {
-        host: "typesense",
+        host: "91.210.170.61",
         port: "8108",
         protocol: "http",
       },

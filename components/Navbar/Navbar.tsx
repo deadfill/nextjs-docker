@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { MenuProps, NavbarProps } from "./Navbar.prop";
-import ButtonHeader from "../ButtonNav/ButtonNav";
+import ButtonNav from "../ButtonNav/ButtonNav";
 import CartSvg from "../../public/icon/headerIcon/cart.svg";
 import FavSvg from "../../public/icon/headerIcon/favSvg.svg";
 import UserSvg from "../../public/icon/headerIcon/userSvg.svg";
@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 const menuItem: MenuProps[] = [
   {
-    route: "/",
+    route: "cart",
     name: "Корзина",
     icon: <CartSvg />,
   },
@@ -33,10 +33,10 @@ export default function Navbar({
     return (
       <li className={styles.li} key={id}>
         <Link href={`${route}`}>
-          <ButtonHeader>
+          <ButtonNav>
             {icon}
             {name}
-          </ButtonHeader>
+          </ButtonNav>
         </Link>
       </li>
     );

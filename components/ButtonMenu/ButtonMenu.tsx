@@ -19,8 +19,6 @@ export default function ButtonMenu({
   );
   const dynamicRoute = useRouter().asPath;
 
-  console.log(open);
-
   const closeMenu = () => {
     dispatch(setClose());
   };

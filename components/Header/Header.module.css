@@ -6,6 +6,7 @@
     margin: 0 auto;
     padding: 18px 0 0 0;
     align-items: center;
+    justify-content: center;
     grid-template-areas: 
     "logo button search navbar"
 }
@@ -27,7 +28,9 @@
 }
 
 @media (max-width: 1200px) {
-
+  .wrapper {
+    grid-template-columns: 174px 74px 3fr 1fr;
+  }
   }
 
 @media (max-width: 998px) {

@@ -1,7 +1,7 @@
 .wrapper {
     display: grid;
     cursor: pointer;
-    background-color: aquamarine;
+    max-width: 240px;
 }
 
 .wrapper_image {
@@ -9,13 +9,45 @@
     height: 240px;
 }
 
-.hits_name {
+.product_price {
     font-size: 20px;
-    margin-bottom: 5px;
+    line-height: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
+.product_name {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--grey-04);
+}
 
+.product_category {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--orange-01);
+}
 
+.product_category_brend {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--grey-04);
+}
+
+.product_category_name {
+    text-decoration: underline;
+}
+
+.product_cart_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 
