@@ -19,7 +19,7 @@ import { renderToString } from "react-dom/server";
 
 type SearchPageProps = {
   serverState?: InstantSearchServerState;
-  serverUrl: URL;
+  serverUrl: string;
 };
 
 export default function Help({
