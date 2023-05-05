@@ -49,5 +49,13 @@
     justify-content: space-between;
 }
 
-
+.button_cart {
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: var(--orange-01);
+}
 

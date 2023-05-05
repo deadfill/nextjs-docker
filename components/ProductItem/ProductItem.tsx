@@ -75,7 +75,7 @@ export default function Hit({ hit }: any) {
             <button onClick={incr}>+</button>
           </div>
         ) : (
-          <button onClick={addCart}>В корзину</button>
+          <button className={styles.button_cart} onClick={addCart}>В корзину</button>
         )}
       </div>
     </>

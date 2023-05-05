@@ -7,6 +7,7 @@
 .wrapper_menu {
     width: 300px;
     margin-right: 60px;
+    background-color: black;
 }
 
 .hit_list {
@@ -21,6 +22,7 @@
 .list_pagination {
     display: flex;
     justify-content: center;
+    
 }
 
 .item_pagination {
