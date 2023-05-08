@@ -9,8 +9,8 @@ export default function ButtonNav({
   counter,
   ...props
 }: ButtonNavProps): JSX.Element {
-  const cartCouner = useSelector(
-    (state: AppState) => state.rootReducer.cartSlice.counter
+  const cartCounter = useSelector(
+    (state: AppState) => state.cartSlice.counter
   );
   return (
     <div className={styles.wrapper_button}>
@@ -22,7 +22,7 @@ export default function ButtonNav({
       >
         {children}
       </button>
-      {counter && <div className={styles.cart_counter}>{cartCouner}</div>}
+      {counter && cartCounter > 0 && <div className={styles.cart_counter}>{cartCounter}</div>}
     </div>
   );
 }

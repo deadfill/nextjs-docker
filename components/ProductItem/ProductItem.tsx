@@ -8,6 +8,11 @@ import {
   deleteProduct,
   increment,
 } from "@/redux/slices/cartSlice";
+import { addFav } from "@/redux/slices/favoriteSlice";
+import CartIcon from "../../public/icon/productIcon/cartIcon.svg";
+import FavoriteIcon from "../../public/icon/productIcon/favoriteIcon.svg";
+import IncrIcon from "../../public/icon/productIcon/incr.svg";
+import DecrIcon from "../../public/icon/productIcon/decr.svg";
 
 export default function Hit({ hit }: any) {
   const [cart, setCart] = useState(false);
@@ -46,6 +51,10 @@ export default function Hit({ hit }: any) {
     dispatch(addProduct(obj));
   };
 
+  const addFavorite = () => {
+    dispatch (addFav(obj))
+  }
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -57,6 +66,7 @@ export default function Hit({ hit }: any) {
             fill
             priority
           />
+          <button className={styles.button_favorite} onClick={addFavorite}><FavoriteIcon className={styles.favoriteIcon}/></button>
         </div>
         <div className={styles.product_price}>{hit.price} &#8381;</div>
         <div className={styles.product_name}>
@@ -70,12 +80,12 @@ export default function Hit({ hit }: any) {
         </div>
         {cart ? (
           <div className={styles.product_cart_wrapper}>
-            <button onClick={decr}>-</button>
+            <button className={styles.button_cart_wrapper} onClick={decr}><DecrIcon className={styles.decrIcon}/></button>
             <div>{count}</div>
-            <button onClick={incr}>+</button>
+            <button className={styles.button_cart_wrapper} onClick={incr}><IncrIcon className={styles.incrIcon}/></button>
           </div>
         ) : (
-          <button className={styles.button_cart} onClick={addCart}>В корзину</button>
+          <button className={styles.button_cart} onClick={addCart}><CartIcon />В корзину</button>
         )}
       </div>
     </>

@@ -7,7 +7,39 @@
 .wrapper_menu {
     width: 300px;
     margin-right: 60px;
-    background-color: black;
+    
+}
+
+.titleCategory {
+    padding: 8px 12px 8px 12px;
+    color: #6E7191;
+    border-radius: 8px;
+    background-color: var(--grey-05);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.category {
+    padding: 8px 12px 8px 6px;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    color: #6E7191;
+}
+
+.categoryPrice {
+    padding: 8px 12px 8px 6px;
+    margin: 0 auto; 
+}
+
+.categoryPrice input {
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #dedbdb;
+    border-radius: 12px;
+    height: 100%;
+    outline: none;
 }
 
 .hit_list {
@@ -30,6 +62,10 @@
 }
 
 .link_pagination {
+    font-size: 20px;
+}
+
+.link_pagination:focus {
     font-size: 20px;
 }
 

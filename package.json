@@ -36,12 +36,14 @@
     "react-instantsearch-hooks-web": "^6.43.0",
     "react-redux": "^8.0.5",
     "react-responsive": "^9.0.2",
+    "redux-persist": "^6.0.0",
     "typescript": "5.0.3",
     "typesense": "^1.5.3",
     "typesense-instantsearch-adapter": "^2.6.0"
   },
   "devDependencies": {
     "@types/react-instantsearch-dom": "^6.12.3",
+    "@types/redux-persist": "^4.3.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "2.8.7"

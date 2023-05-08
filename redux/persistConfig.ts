@@ -7,22 +7,22 @@ import cartSlice from "./slices/cartSlice";
 import favoriteSlice from "./slices/favoriteSlice";
 
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["cartSlice", "favoriteSlice"],
-};
+    key: "root",
+    storage,
+    whitelist: ["cartSlice", "favoriteSlice"],
+  };
+
 
 const rootReducer = combineReducers({
   menuSlice,
   cartSlice,
-  favoriteSlice
+  favoriteSlice,
 });
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const makeStore = () =>
   configureStore({
     reducer: persistedReducer,
+    devTools: true,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -30,24 +30,10 @@ const makeStore = () =>
           ignoredActions: [HYDRATE],
         },
       }),
-    devTools: true,
   });
 
-const store = makeStore();
-const persistor = persistStore(store);
-  
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppDispatch = typeof store.dispatch;
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
-
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
-
-
+export default persistedReducer;

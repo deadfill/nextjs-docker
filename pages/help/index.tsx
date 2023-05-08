@@ -37,8 +37,10 @@ export default function Help({
       >
         <div className={styles.wrapper}>
           <div className={styles.wrapper_menu}>
-            <RefinementList attribute={"category"}></RefinementList>
-            <RangeInput attribute="price" />
+            <div className={styles.titleCategory}>Категории</div>
+            <div className={styles.category}><RefinementList attribute={"category"}></RefinementList></div>
+            <div className={styles.titleCategory}>Цена</div>
+            <div className={styles.categoryPrice}><RangeInput attribute="price"> </RangeInput></div>
           </div>
           <div>
             <HitsPerPage

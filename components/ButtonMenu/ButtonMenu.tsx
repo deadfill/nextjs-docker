@@ -15,7 +15,7 @@ export default function ButtonMenu({
 }: ButtonMenuProps): JSX.Element {
   const dispatch = useDispatch();
   const open = useSelector(
-    (state: AppState) => state.rootReducer.menuSlice.opened
+    (state: AppState) => state.menuSlice.opened
   );
   const dynamicRoute = useRouter().asPath;
 
