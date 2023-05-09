@@ -1,15 +1,14 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
-import { createWrapper, HYDRATE } from "next-redux-wrapper";
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import menuSlice from './slices/menuSlice';
 import cartSlice from "./slices/cartSlice";
 import favoriteSlice from "./slices/favoriteSlice";
+import storage from "redux-persist/lib/storage";
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
 
 const persistConfig = {
-  key: "root",
+  key: 'next',
   storage,
-  whitelist: ["cartSlice", "favoriteSlice"],
+  whitelist: ['favoriteSlice', 'cartSlice',] 
 };
 
 const rootReducer = combineReducers({
@@ -20,22 +19,22 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+
 const makeStore = () =>
   configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
-          // Ignore these action types in middleware serialization checks
-          ignoredActions: [HYDRATE],
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
+     }),
     devTools: true,
-  });
+});
 
-const store = makeStore();
-const persistor = persistStore(store);
-  
+export const store = makeStore();
+
+export const persistor = persistStore(store);
 
 
 export type AppDispatch = typeof store.dispatch;
@@ -47,8 +46,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action
 >;
-
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
 
 
 

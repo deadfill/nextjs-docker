@@ -14,9 +14,7 @@ export default function ButtonMenu({
   ...props
 }: ButtonMenuProps): JSX.Element {
   const dispatch = useDispatch();
-  const open = useSelector(
-    (state: AppState) => state.menuSlice.opened
-  );
+  const open = useSelector((state: AppState) => state.menuSlice.opened);
   const dynamicRoute = useRouter().asPath;
 
   const closeMenu = () => {
@@ -76,4 +74,3 @@ export default function ButtonMenu({
     </>
   );
 }
-
