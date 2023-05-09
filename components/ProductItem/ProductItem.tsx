@@ -52,8 +52,8 @@ export default function Hit({ hit }: any) {
   };
 
   const addFavorite = () => {
-    dispatch(addFav(obj));
-  };
+    dispatch (addFav(obj))
+  }
 
   return (
     <>
@@ -66,9 +66,7 @@ export default function Hit({ hit }: any) {
             fill
             priority
           />
-          <button className={styles.button_favorite} onClick={addFavorite}>
-            <FavoriteIcon className={styles.favoriteIcon} />
-          </button>
+          <button className={styles.button_favorite} onClick={addFavorite}><FavoriteIcon className={styles.favoriteIcon}/></button>
         </div>
         <div className={styles.product_price}>{hit.price} &#8381;</div>
         <div className={styles.product_name}>
@@ -82,20 +80,15 @@ export default function Hit({ hit }: any) {
         </div>
         {cart ? (
           <div className={styles.product_cart_wrapper}>
-            <button className={styles.button_cart_wrapper} onClick={decr}>
-              <DecrIcon className={styles.decrIcon} />
-            </button>
+            <button className={styles.button_cart_wrapper} onClick={decr}><DecrIcon className={styles.decrIcon}/></button>
             <div>{count}</div>
-            <button className={styles.button_cart_wrapper} onClick={incr}>
-              <IncrIcon className={styles.incrIcon} />
-            </button>
+            <button className={styles.button_cart_wrapper} onClick={incr}><IncrIcon className={styles.incrIcon}/></button>
           </div>
         ) : (
-          <button className={styles.button_cart} onClick={addCart}>
-            <CartIcon />В корзину
-          </button>
+          <button className={styles.button_cart} onClick={addCart}><CartIcon />В корзину</button>
         )}
       </div>
     </>
   );
 }
+

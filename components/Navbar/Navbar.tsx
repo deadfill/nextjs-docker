@@ -1,3 +1,4 @@
+
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { MenuProps, NavbarProps } from "./Navbar.prop";

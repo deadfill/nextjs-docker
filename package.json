@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/react-instantsearch-dom": "^6.12.3",
+    "@types/redux-persist": "^4.3.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "2.8.7"
