@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ProductItem.module.css";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
   decrement,
@@ -13,11 +13,21 @@ import CartIcon from "../../public/icon/productIcon/cartIcon.svg";
 import FavoriteIcon from "../../public/icon/productIcon/favoriteIcon.svg";
 import IncrIcon from "../../public/icon/productIcon/incr.svg";
 import DecrIcon from "../../public/icon/productIcon/decr.svg";
+import { AppState } from "@/redux/store";
 
 export default function Hit({ hit }: any) {
   const [cart, setCart] = useState(false);
   const [count, setCount] = useState(0);
+  const item = useSelector((state: AppState) => state.cartSlice.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const items = item.find((item) => item.id === hit.id);
+    if (items) {
+      setCount(items.count);
+      setCart(true);
+    }
+  }, [hit.objectID]);
 
   const obj = {
     id: hit.objectID,
@@ -52,8 +62,8 @@ export default function Hit({ hit }: any) {
   };
 
   const addFavorite = () => {
-    dispatch (addFav(obj))
-  }
+    dispatch(addFav(obj));
+  };
 
   return (
     <>
@@ -66,7 +76,9 @@ export default function Hit({ hit }: any) {
             fill
             priority
           />
-          <button className={styles.button_favorite} onClick={addFavorite}><FavoriteIcon className={styles.favoriteIcon}/></button>
+          <button className={styles.button_favorite} onClick={addFavorite}>
+            <FavoriteIcon className={styles.favoriteIcon} />
+          </button>
         </div>
         <div className={styles.product_price}>{hit.price} &#8381;</div>
         <div className={styles.product_name}>
@@ -80,15 +92,20 @@ export default function Hit({ hit }: any) {
         </div>
         {cart ? (
           <div className={styles.product_cart_wrapper}>
-            <button className={styles.button_cart_wrapper} onClick={decr}><DecrIcon className={styles.decrIcon}/></button>
+            <button className={styles.button_cart_wrapper} onClick={decr}>
+              <DecrIcon className={styles.decrIcon} />
+            </button>
             <div>{count}</div>
-            <button className={styles.button_cart_wrapper} onClick={incr}><IncrIcon className={styles.incrIcon}/></button>
+            <button className={styles.button_cart_wrapper} onClick={incr}>
+              <IncrIcon className={styles.incrIcon} />
+            </button>
           </div>
         ) : (
-          <button className={styles.button_cart} onClick={addCart}><CartIcon />В корзину</button>
+          <button className={styles.button_cart} onClick={addCart}>
+            <CartIcon />В корзину
+          </button>
         )}
       </div>
     </>
   );
 }
-

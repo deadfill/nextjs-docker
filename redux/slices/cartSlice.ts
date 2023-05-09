@@ -38,8 +38,10 @@ export const cartSlice = createSlice({
     },
     deleteProduct: (state, action) => {
       const item = state.cart.find((item) => item.id === action.payload);
-      if(item) {
+      if(item?.count === 1) {
         state.cart = state.cart.filter(item => item.id !== action.payload);
+      } else if (item) {
+        item.count--;
       }
     }
   },
