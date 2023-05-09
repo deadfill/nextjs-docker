@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 export default function Help(): JSX.Element {
   const cartItems = useSelector(
-    (state: AppState) => state.rootReducer.cartSlice.cart
+    (state: AppState) => state.cartSlice.cart
   );
   if (cartItems.length === 0) {
     return <div>Вы еще не добавили не один товар</div>;

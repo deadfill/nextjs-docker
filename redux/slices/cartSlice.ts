@@ -47,7 +47,7 @@ export const cartSlice = createSlice({
 
 export const { increment, decrement, addProduct, deleteProduct } = cartSlice.actions;
 
-export const selectCount = (state: AppState) => state.rootReducer.menuSlice.opened;
+export const selectCount = (state: AppState) => state.menuSlice.opened;
 
 
 

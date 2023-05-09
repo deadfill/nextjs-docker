@@ -6,4 +6,5 @@ export interface MenuProps {
     route: string,
     name: string,
     icon: ReactElement<SVGElement>
+    counter?: boolean,
 }
