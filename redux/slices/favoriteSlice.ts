@@ -34,5 +34,4 @@ export const { addFav, deleteProduct } = favoriteSlice.actions;
 export const selectCount = (state: AppState) => state.rootReducer.menuSlice.opened;
 
 
-
 export default favoriteSlice.reducer;
