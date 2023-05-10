@@ -74,12 +74,8 @@ export default function MenuBurger({
   ...props
 }: MenuBurgerProps): JSX.Element {
   const dispatch = useDispatch();
-  const open = useSelector(
-    (state: AppState) => state.rootReducer.menuSlice.opened
-  );
-  const level = useSelector(
-    (state: AppState) => state.rootReducer.menuSlice.menuLevel
-  );
+  const open = useSelector((state: AppState) => state.menuSlice.opened);
+  const level = useSelector((state: AppState) => state.menuSlice.menuLevel);
   const [menuLevel2, setMenuLevel2] = useState([]);
   const [render, setRender] = useState(false);
   const [title, setTitle] = useState("");
