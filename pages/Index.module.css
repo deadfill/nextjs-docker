@@ -96,5 +96,7 @@
   }
 
   @media (max-width: 576px) {
-
+    .hit_list {
+        grid-template-columns: 1fr 1fr;
+    }
   }

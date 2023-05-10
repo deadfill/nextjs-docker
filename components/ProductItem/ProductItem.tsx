@@ -8,49 +8,74 @@ import {
   deleteProduct,
   increment,
 } from "@/redux/slices/cartSlice";
-import { addFav } from "@/redux/slices/favoriteSlice";
+import { toogleFav } from "@/redux/slices/favoriteSlice";
 import CartIcon from "../../public/icon/productIcon/cartIcon.svg";
 import FavoriteIcon from "../../public/icon/productIcon/favoriteIcon.svg";
+import FavoriteIconActiv from "../../public/icon/productIcon/favoritIconActiv.svg";
 import IncrIcon from "../../public/icon/productIcon/incr.svg";
 import DecrIcon from "../../public/icon/productIcon/decr.svg";
 import { AppState } from "@/redux/store";
+import { IProduct } from "@/models/Product";
 
-export default function Hit({ hit }: any) {
+export default function Hit({ hit }: { hit: IProduct }) {
   const [cart, setCart] = useState(false);
+  const [fav, setFav] = useState(false);
   const [count, setCount] = useState(0);
-  const item = useSelector((state: AppState) => state.cartSlice.cart);
+  const cartItems = useSelector((state: AppState) => state.cartSlice.cart);
+  const favItems = useSelector(
+    (state: AppState) => state.favoriteSlice.favorite
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const items = item.find((item) => item.id === hit.id);
+    const items = cartItems.find((item) => item.id === hit.id);
     if (items) {
       setCount(items.count);
       setCart(true);
     }
-  }, [hit.objectID]);
+  }, [hit.id]);
 
-  const obj = {
-    id: hit.objectID,
+  useEffect(() => {
+    const items = favItems.find((item) => item.id === hit.id);
+    if (items) {
+      setFav(true);
+    }
+  }, [hit.id]);
+
+  const cartItem = {
+    id: hit.id,
     name: hit.name,
+    descriptions: hit.descriptions,
+    price: hit.price,
+    category: hit.category,
+    count: 1,
+  };
+
+  const favItem = {
+    id: hit.id,
+    name: hit.name,
+    descriptions: hit.descriptions,
+    price: hit.price,
+    category: hit.category,
     count: 1,
   };
 
   const incr = () => {
     dispatch(increment());
     setCount((count) => count + 1);
-    dispatch(addProduct(obj));
+    dispatch(addProduct(cartItem));
   };
 
   const decr = () => {
     if (count <= 1) {
       setCart(false);
       dispatch(decrement());
-      dispatch(deleteProduct(hit.objectID));
+      dispatch(deleteProduct(hit.id));
       setCount(0);
       return;
     }
     dispatch(decrement());
-    dispatch(deleteProduct(hit.objectID));
+    dispatch(deleteProduct(hit.id));
     setCount((count) => count - 1);
   };
 
@@ -58,11 +83,12 @@ export default function Hit({ hit }: any) {
     setCart(true);
     setCount((count) => count + 1);
     dispatch(increment());
-    dispatch(addProduct(obj));
+    dispatch(addProduct(cartItem));
   };
 
   const addFavorite = () => {
-    dispatch(addFav(obj));
+    setFav((fav) => !fav);
+    dispatch(toogleFav(favItem));
   };
 
   return (
@@ -77,7 +103,11 @@ export default function Hit({ hit }: any) {
             priority
           />
           <button className={styles.button_favorite} onClick={addFavorite}>
-            <FavoriteIcon className={styles.favoriteIcon} />
+            {fav ? (
+              <FavoriteIconActiv className={styles.favoriteIcon} />
+            ) : (
+              <FavoriteIcon className={styles.favoriteIcon} />
+            )}
           </button>
         </div>
         <div className={styles.product_price}>{hit.price} &#8381;</div>

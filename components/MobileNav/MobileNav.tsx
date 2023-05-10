@@ -26,7 +26,7 @@ const menuItem: MobileMenuProps[] = [
     counter: true,
   },
   {
-    route: "help",
+    route: "favorite",
     name: "Избраное",
     icon: <FavSvg />,
   },

@@ -47,6 +47,10 @@
 .product_cart_wrapper {
     display: flex;
     justify-content: space-between;
+    border: none;
+    padding: 6px 6px 6px 6px;
+    align-items: center;
+    
 }
 
 .button_cart_wrapper {
@@ -54,6 +58,13 @@
     border: none;
     padding: 6px 6px 6px 6px;
     border-radius: 12px;
+}
+
+.cart_counter {
+    color: var(--grey-01);
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
 }
 
 .button_cart {

@@ -31,8 +31,6 @@ export const menuSlice = createSlice({
 
 export const { setOpen, setClose, setMenuLevel } = menuSlice.actions;
 
-export const selectCount = (state: AppState) => state.rootReducer.menuSlice.opened;
-
 
 
 export default menuSlice.reducer;
