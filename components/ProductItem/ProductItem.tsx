@@ -15,9 +15,8 @@ import FavoriteIconActiv from "../../public/icon/productIcon/favoritIconActiv.sv
 import IncrIcon from "../../public/icon/productIcon/incr.svg";
 import DecrIcon from "../../public/icon/productIcon/decr.svg";
 import { AppState } from "@/redux/store";
-import { IProduct } from "@/models/Product";
 
-export default function Hit({ hit }: { hit: IProduct }) {
+export default function Hit({ hit }: any) {
   const [cart, setCart] = useState(false);
   const [fav, setFav] = useState(false);
   const [count, setCount] = useState(0);
@@ -33,17 +32,17 @@ export default function Hit({ hit }: { hit: IProduct }) {
       setCount(items.count);
       setCart(true);
     }
-  }, [hit.id]);
+  }, [hit.objectID]);
 
   useEffect(() => {
     const items = favItems.find((item) => item.id === hit.id);
     if (items) {
       setFav(true);
     }
-  }, [hit.id]);
+  }, [hit.objectID]);
 
   const cartItem = {
-    id: hit.id,
+    id: hit.objectID,
     name: hit.name,
     descriptions: hit.descriptions,
     price: hit.price,
@@ -52,7 +51,7 @@ export default function Hit({ hit }: { hit: IProduct }) {
   };
 
   const favItem = {
-    id: hit.id,
+    id: hit.objectID,
     name: hit.name,
     descriptions: hit.descriptions,
     price: hit.price,
@@ -70,12 +69,12 @@ export default function Hit({ hit }: { hit: IProduct }) {
     if (count <= 1) {
       setCart(false);
       dispatch(decrement());
-      dispatch(deleteProduct(hit.id));
+      dispatch(deleteProduct(hit.objectID));
       setCount(0);
       return;
     }
     dispatch(decrement());
-    dispatch(deleteProduct(hit.id));
+    dispatch(deleteProduct(hit.objectID));
     setCount((count) => count - 1);
   };
 
