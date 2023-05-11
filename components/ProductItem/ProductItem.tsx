@@ -69,12 +69,12 @@ export default function Hit({ hit }: any) {
     if (count <= 1) {
       setCart(false);
       dispatch(decrement());
-      dispatch(deleteProduct(hit.objectID));
+      dispatch(deleteProduct(cartItem));
       setCount(0);
       return;
     }
     dispatch(decrement());
-    dispatch(deleteProduct(hit.objectID));
+    dispatch(deleteProduct(cartItem));
     setCount((count) => count - 1);
   };
 
@@ -110,11 +110,12 @@ export default function Hit({ hit }: any) {
           </button>
         </div>
         <div className={styles.product_price}>{hit.price} &#8381;</div>
+        <div>{hit.descriptions}</div>
         <div className={styles.product_name}>
           {hit.name[0].toUpperCase() + hit.name.slice(1)}
         </div>
         <div className={styles.product_category}>
-          <div className={styles.product_category_brend}>Бренд:</div>
+          <div className={styles.product_category_brend}>Категория:</div>
           <div className={styles.product_category_name}>
             {hit.category[0].toUpperCase() + hit.category.slice(1)}
           </div>

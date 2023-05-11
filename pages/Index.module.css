@@ -5,9 +5,24 @@
 }
 
 .wrapper_menu {
+    display: flex;
+    flex-direction: column;
     width: 300px;
     margin-right: 60px;
     
+}
+
+.menu_description {
+    padding: 13px;
+    background-color: var(--info-baner);
+    border-radius: 12px;
+    margin: 0;
+    margin-bottom: 30px;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 400;
+    color: var(--grey-04);
 }
 
 .titleCategory {
@@ -22,7 +37,6 @@
 
 .category {
     padding: 8px 12px 8px 6px;
-    margin: 0 auto;
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
@@ -40,6 +54,10 @@
     border-radius: 12px;
     height: 100%;
     outline: none;
+}
+
+.currentref_label {
+    display: none;
 }
 
 .hit_list {
@@ -67,6 +85,21 @@
 
 .link_pagination:focus {
     font-size: 20px;
+}
+
+.reflist_label {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.filters {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.sort_price {
+    margin-left: auto;
 }
 
 

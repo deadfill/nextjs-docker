@@ -1,0 +1,15 @@
+.wrapper_button {
+    align-self: center;
+    margin-bottom: 16px;
+}
+
+.clear_button {
+    font-size: 16px;
+    line-height: 28px;
+    padding: 8px 31px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    color: var(--grey-04);
+    background-color: var(--grey-05);
+}

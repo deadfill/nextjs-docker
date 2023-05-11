@@ -1,24 +1,16 @@
 import { AppState } from "@/redux/store";
 import { useSelector } from "react-redux";
+import styles from "./Cart.module.css";
+import NotCartItem from "@/components/NotCartItem/NotCartItem";
+import CartItem from "@/components/CartItem/CartItem";
 
 export default function Help(): JSX.Element {
   const cartItems = useSelector((state: AppState) => state.cartSlice.cart);
-  if (cartItems.length === 0) {
-    return <div>Вы еще не добавили не один товар</div>;
-  }
-
-  const renderCart = cartItems.map((item, id) => {
-    return (
-      <li key={id}>
-        <div>{item.name}</div>
-        <div>{item.count}</div>
-      </li>
-    );
-  });
 
   return (
-    <>
-      <ul>{renderCart}</ul>
-    </>
+    <div>
+      <h2 className={styles.cart_htag}>Корзина</h2>
+      {cartItems.length != 0 ? <CartItem /> : <NotCartItem />}
+    </div>
   );
 }

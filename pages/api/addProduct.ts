@@ -1,20 +1,20 @@
 
-import Typesense from 'typesense';
+// import Typesense from 'typesense';
 import connectMongo from '../../libs/mongodb';
 import Product from '../../models/Product';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const client = new Typesense.Client({
-  nodes: [
-    {
-      host: 'localhost',
-      port: 8108,
-      protocol: 'http',
-    },
-  ],
-  apiKey: 'xyz',
-  connectionTimeoutSeconds: 2,
-});
+// const client = new Typesense.Client({
+//   nodes: [
+//     {
+//       host: 'localhost',
+//       port: 8108,
+//       protocol: 'http',
+//     },
+//   ],
+//   apiKey: 'xyz',
+//   connectionTimeoutSeconds: 2,
+// });
 
 export default async function addProduct(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -25,8 +25,6 @@ export default async function addProduct(req: NextApiRequest, res: NextApiRespon
     console.log('CREATING DOCUMENT');
     const product = await Product.create(req.body);
     console.log('CREATED DOCUMENT');
-
-    console.log("создание индекса typesense")
 
     res.json({ product });
     // const product = req.body;

@@ -36,12 +36,6 @@ export default function Search({
           {...props}
           placeholder="Я ищу"
         />
-        <CurrentRefinements
-          classNames={{
-            root: styles.currentref_root,
-            label: styles.currentref_label,
-          }}
-        ></CurrentRefinements>
       </div>
     </>
   );

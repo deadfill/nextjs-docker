@@ -1,4 +1,3 @@
-
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { MenuProps, NavbarProps } from "./Navbar.prop";
@@ -36,10 +35,9 @@ export default function Navbar({
       <li className={styles.li} key={id}>
         <Link href={`${route}`}>
           <ButtonNav counter={counter}>
-          {icon}
-          {name}
+            {icon}
+            {name}
           </ButtonNav>
-
         </Link>
       </li>
     );

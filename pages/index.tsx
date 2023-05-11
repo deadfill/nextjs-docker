@@ -1,96 +1,84 @@
 import {
+  CurrentRefinements,
   Hits,
-  HitsPerPage,
-  InstantSearch,
   Pagination,
   RangeInput,
   RefinementList,
   SortBy,
-  InstantSearchServerState,
-  InstantSearchSSRProvider,
 } from "react-instantsearch-hooks-web";
 import Hit from "@/components/ProductItem/ProductItem";
 import styles from "./Index.module.css";
-import { getServerState } from "react-instantsearch-hooks-server";
-import { searchClient } from "@/libs/clientTypesense";
-import { createInstantSearchRouterNext } from "react-instantsearch-hooks-router-nextjs";
-import singletonRouter from "next/router";
-import { renderToString } from "react-dom/server";
+import ButtonClearFilter from "@/components/ButtonClearFilter/ButtonClearFilter";
+import { Stats } from "@/components/Stats/Stats";
 
-type SearchPageProps = {
-  serverState?: InstantSearchServerState;
-  serverUrl: string;
-};
-
-export default function Help({
-  serverState,
-  serverUrl,
-}: SearchPageProps): JSX.Element {
+export default function Index(): JSX.Element {
   return (
-    <InstantSearchSSRProvider {...serverState}>
-      <InstantSearch
-        indexName="products"
-        searchClient={searchClient}
-        routing={{
-          router: createInstantSearchRouterNext({ singletonRouter, serverUrl }),
-        }}
-      >
-        <div className={styles.wrapper}>
-          <div className={styles.wrapper_menu}>
-            <div className={styles.titleCategory}>Категории</div>
-            <div className={styles.category}>
-              <RefinementList attribute={"category"}></RefinementList>
-            </div>
-            <div className={styles.titleCategory}>Цена</div>
-            <div className={styles.categoryPrice}>
-              <RangeInput attribute="price"> </RangeInput>
-            </div>
-          </div>
-          <div>
-            <HitsPerPage
-              items={[
-                { label: "8 hits per page", value: 8, default: true },
-                { label: "16 hits per page", value: 16 },
-              ]}
-            />
-            <SortBy
-              items={[
-                { label: "Default", value: "products" },
-                { label: "Price (asc)", value: "products/sort/price:asc" },
-                { label: "Price (desc)", value: "products/sort/price:desc" },
-              ]}
-            />
-            <Hits
-              classNames={{
-                list: styles.hit_list,
-              }}
-              hitComponent={Hit}
-            />
-            <Pagination
-              classNames={{
-                list: styles.list_pagination,
-                item: styles.item_pagination,
-                link: styles.link_pagination,
-              }}
-            />
-          </div>
+    <div className={styles.wrapper}>
+      <div className={styles.wrapper_menu}>
+        <p className={styles.menu_description}>
+          Наша компания продает продукцию только оптом и по безналичному
+          расчету, работает только с юридическими лицами на основании
+          заключенных договоров. Цены, указанные на сайте, не являются публичной
+          офертой и носят информационный характер. Все цены указаны в рублях с
+          учетом НДС.
+        </p>
+        <ButtonClearFilter />
+        <Stats />
+        <div className={styles.titleCategory}>Категории</div>
+        <div className={styles.category}>
+          <RefinementList
+            attribute={"category"}
+            classNames={{
+              label: styles.reflist_label,
+            }}
+          ></RefinementList>
         </div>
-      </InstantSearch>
-    </InstantSearchSSRProvider>
+        <div className={styles.titleCategory}>Цена</div>
+        <div className={styles.categoryPrice}>
+          <RangeInput
+            attribute="price"
+            translations={{
+              separatorElementText: "-",
+              submitButtonText: "Применить",
+            }}
+          />
+        </div>
+        <ButtonClearFilter />
+      </div>
+      <div>
+        <div className={styles.filters}>
+          <CurrentRefinements
+            classNames={{
+              root: styles.currentref_root,
+              label: styles.currentref_label,
+            }}
+          ></CurrentRefinements>
+          <SortBy
+            items={[
+              { label: "Default", value: "products" },
+              { label: "Price (asc)", value: "products/sort/price:asc" },
+              { label: "Price (desc)", value: "products/sort/price:desc" },
+            ]}
+            classNames={{
+              root: styles.sort_price,
+            }}
+          />
+        </div>
+
+        <Hits
+          classNames={{
+            list: styles.hit_list,
+          }}
+          hitComponent={Hit}
+        />
+        <Pagination
+          classNames={{
+            list: styles.list_pagination,
+            item: styles.item_pagination,
+            link: styles.link_pagination,
+          }}
+        />
+      </div>
+    </div>
   );
-}
-
-export async function getServerSideProps({ req }: any) {
-  const protocol = req.headers.referer?.split("://")[0] || "https";
-  const serverUrl = `${protocol}://${req.headers.host}${req.url}`;
-  const serverState = await getServerState(<Help serverUrl={serverUrl} />, {
-    renderToString,
-  });
-
-  return {
-    props: {
-      serverState,
-      serverUrl,
-    },
-  };
 }

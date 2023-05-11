@@ -3,6 +3,7 @@ import styles from "./ButtonNav.module.css";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/store";
+import App from "next/app";
 
 export default function ButtonNav({
   children,
