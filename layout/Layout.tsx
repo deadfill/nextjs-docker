@@ -5,11 +5,7 @@ import styles from "./Layout.module.css";
 import { Configure, InstantSearch } from "react-instantsearch-hooks-web";
 import { searchClient } from "@/libs/clientTypesense";
 import MobileNav from "@/components/MobileNav/MobileNav";
-export default function Layout({
-  children,
-  serverState,
-}: LayoutProps): JSX.Element {
-  console.log(serverState);
+export default function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <InstantSearch indexName="products" searchClient={searchClient}>
